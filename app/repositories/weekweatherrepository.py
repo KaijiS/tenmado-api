@@ -1,4 +1,5 @@
 import datetime
+from typing import Any
 
 from google.cloud import firestore
 
@@ -9,8 +10,9 @@ def findbylargeareacode(
     large_area_code: str,
     report_date_from: datetime.date,
     report_date_to: datetime.date,
-    report_days: int,
-):
+    forecastdays: int,
+) -> dict[str:Any]:
+
     # firestoreメモ
     # Reference 概念
     # Snapshot 実態
@@ -28,6 +30,7 @@ def findbylargeareacode(
         .where(
             "report_datetime",
             "<=",
+            # 1日後の 00時00分00秒までが範囲
             datetime.datetime.combine(report_date_to, datetime.time())
             + datetime.timedelta(days=1),
         )
@@ -43,7 +46,7 @@ def findbylargeareacode(
             # snapshotのreferenceに対してcollection(subcollection)を指定して上述同様にqueryの実行
             weekweather_querydocumentsnapshot.reference.collection("forecasts")
             .order_by("forecast_target_date")
-            .limit(report_days)
+            .limit(forecastdays)
             .stream()
         )
 
