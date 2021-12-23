@@ -10,7 +10,7 @@ def findbylargeareacode(
     report_date_from: datetime.date,
     report_date_to: datetime.date,
 ):
-    weekweather_collection = (
+    weekweather_querydocumentsnapshots = (
         db.collection("weekweather")
         .where("large_area_code", "==", large_area_code)
         .where(
@@ -25,6 +25,23 @@ def findbylargeareacode(
             + datetime.timedelta(days=1),
         )
         .order_by("report_datetime")
-    )
-    weekweather = weekweather_collection.get()
-    return weekweather
+    ).stream()
+
+    weekweathers = []
+    for weekweather_querydocumentsnapshot in weekweather_querydocumentsnapshots:
+        weekweather = weekweather_querydocumentsnapshot.to_dict()
+
+        forecast_querydocumentsnapshots = (
+            weekweather_querydocumentsnapshot.reference.collection("forecasts")
+            .order_by("forecast_target_date")
+            .stream()
+        )
+
+        weekweather["forecast"] = [
+            forecast_querydocumentsnapshot.to_dict()
+            for forecast_querydocumentsnapshot in forecast_querydocumentsnapshots
+        ]
+
+        weekweathers.append(weekweather)
+
+    return weekweathers

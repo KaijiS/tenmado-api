@@ -20,7 +20,7 @@ def get_weather_forcast(
     returns
         WeatherForecastResponse
     """
-    weekweather = weekweatherrepository.findbylargeareacode(
+    weekweathers = weekweatherrepository.findbylargeareacode(
         large_area_code=large_area_code,
         report_date_from=report_date_from,
         report_date_to=report_date_to,
@@ -28,4 +28,4 @@ def get_weather_forcast(
 
     # weatherforecastresponse = WeatherForecastResponse()
 
-    return [i.to_dict() for i in weekweather]
+    return weekweathers
