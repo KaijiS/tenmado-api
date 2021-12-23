@@ -24,6 +24,7 @@ def get_weather_forcast(
         large_area_code=large_area_code,
         report_date_from=report_date_from,
         report_date_to=report_date_to,
+        report_days=report_days,
     )
 
     # weatherforecastresponse = WeatherForecastResponse()
