@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "tenmado",
+  "private_key_id": "e62e929ddf4d32967e27eb7a344a70d62c8a3b09",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCjrn75twUt81+k\nVeU7Y8ADvpGjn4yBgdIJF1fS1Y3v31WyyfUbARUleYFLV310MDEVwhdQ2nTe7nie\nSvT9LzIGUJqrHfzaJbFBsuZbM3aY5+DgZSz232jxcX1GTekmbmJx7CZU0GRi847B\ng7aKU/hhpeYoxcDu3whLH0nnKo7+VARmvpycaHQotflkxetsFIpW4P+LlKQVsDlQ\ngj2VP7eJFdBc5/nUkr1FFPWteGTO6PqTQ5sZ63U1j+fkb7b8NXnwXfdmrCSL2gf8\nSfshdMsIks5Dm/X/3phLxxkQ5vPRnEZF8Z1pcuyBMNEKKmavcB35Mnd+3xbF0dXh\nrnm0v1yPAgMBAAECggEAOnYXLPqlE3HzDZ+OReWNTekRXIceaJ0lFxEq0Ydr8Cpt\nEfQXIsOCuYVJ3E6N5ONXjMVrjXnRN1SmaSctlIZ4UBAXBhoqVwISavxKUXWynM9p\nHsyUQEKwWVgnHeay6QKRD86ALFfYGw2RxeVU29g9BSd7asGi9M5dSHOO8k1dkFF/\nmoIV+3x2wFEGLalapNYzLezn+gbXY2/PQ6P49EUCxidmI60hw0K2y6COI7e5TJ4R\nuahpuax84LftftqsP+q/2e4o3YRqPqCNE2F8fRF56/jpOoOxS8dGzzMHOu0xs+M7\ntVDECksLWSZW8ztTY4/mTPuN334S9GxqaOszB+jsvQKBgQDmNu75xS5Q1T+/FaLU\nMnwZ005uh1pnlQBU9F7v41Wce/I9GnsUIX8dEweZ9EajPCT7RuZb45ey8Xmf23mI\nStSWFzLrdCd7diVnupQHDo+QOTRX5w5WCf4O58zvi9OObewx7yUsrCFVZ3HIRP07\nO3I1hbOyr6mCNAJ7oby3RLofRQKBgQC2A9PDyWHCSZJzLBtIuOT9kt3UBU6GWBDu\nTUiH5xmQmi6JOWkdJOURWRY2zcBWV03tPq5TwXuk8Ug+QpAvmBv8cWJxcApsifhT\nxDIIBCc3WWFvV0yMXL25bLTYq8gNTJRPabVX/qMT6cPYZYV3MNOcqU4fw4COpyHm\nGq0uhJqPwwKBgB+5PC8xC9PZvwIO8jQ5jL5mTu2OO1gAwV3zms2FzztUHSpsZr98\nai7Qe4Csl7tQw2vY9k99Sl8/RVpQ/StZ3HeeVMb7Z6Fsw3TK0jEywXfHWj4uudwD\nXn4hVS1BYHLFFQJAiSfhxGonaheF4jtyUqerd/rMmBg4IIt22zGKB/fdAoGAHpjs\nG2iaF3gYt2W9vG7gh8QNqFuwBKN/TSAOxlHSGV3h3s2Y3v5Zx53LPzE9WQZaIjy8\nP3YyG9s3wsebx3Rxl/FTlDA6gF59MU+0/WX9Va+f0oDBbIMWnbopeJcADURHVkY1\n5vH2Zh2Q/6qpUg0SNa68ZFiQHur3pt/rJvvBo9MCgYBc+eVeIqgSpk7BtbbeTFwT\nRtn1WoIF8116PXnzEIFh1nepeLOytyVfY69VRLi0xXpIhvXOktw4ypQFhPaU3MJp\nKNqowkzFwdYxTkbGuCVVebXATc17PcWHF5Bynq2BewHWE6jywkea8YcAhtJ7ckBr\nszFteTx948IyYb454JTW8g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "tenmado-api-local@tenmado.iam.gserviceaccount.com",
+  "client_id": "104427466495955951047",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tenmado-api-local%40tenmado.iam.gserviceaccount.com"
+}

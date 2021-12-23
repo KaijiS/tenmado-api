@@ -20,7 +20,7 @@ class Report(BaseModel):
     forecastdays: int = Field(
         ..., description="予報対象日数", alias="forecastdays", example=7
     )
-    forecast: list[Forecast] = Field(...)
+    forecasts: list[Forecast] = Field(...)
 
     class Config:
         allow_population_by_field_name = True
