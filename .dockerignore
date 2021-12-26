@@ -2,4 +2,4 @@
 __pycache__
 .gitignore
 .python-version
-.gcp_key
+app/.gcp_key
