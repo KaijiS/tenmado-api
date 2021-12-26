@@ -1,5 +1,6 @@
 import datetime
 import math
+import json
 
 from schemas.weatherforecast.weatherforecastresponse import WeatherForecastResponse
 from schemas.weatherforecast.report import Report
@@ -23,6 +24,12 @@ def get_weather_forcast(
     returns
         WeatherForecastResponse
     """
+
+    # 天気コードとその内容のマッピング情報をjsonファイルから取得
+    with open("constants/TELOPS.json") as f:
+        TELOPS = json.load(f)
+
+    # 週予報情報を取得
     weekweathers = weekweatherrepository.findbylargeareacode(
         large_area_code=large_area_code,
         report_date_from=report_date_from,
@@ -48,7 +55,7 @@ def get_weather_forcast(
 
             forcast = Forecast(
                 forecast_target_date=forecast_source["forecast_target_date"],
-                weather=forecast_source["weather_code"],
+                weather=TELOPS[forecast_source["weather_code"]][3],
                 pop=forecast_source["pop"],
                 reliability=forecast_source["reliability"],
                 lowest_temperature=forecast_source["lowest_temperature"],
