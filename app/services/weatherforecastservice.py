@@ -92,9 +92,8 @@ def get_weather_forcast(
     return weatherforecastresponse
 
 
-def get_start_date() -> StartDateResponse:
+def get_start_date(large_area_code: str) -> StartDateResponse:
 
-    start_date = weekweatherrepository.findStartDate()
-    print(start_date)
+    start_date = weekweatherrepository.findstartdatebylargeareacode(large_area_code)
     startdateresponse = StartDateResponse(start_date=start_date)
     return startdateresponse

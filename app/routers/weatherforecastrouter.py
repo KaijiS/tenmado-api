@@ -29,8 +29,10 @@ async def get_weather_forcast(
 
 
 @router.get("/startdate", response_model=StartDateResponse)
-async def get_weather_forcast() -> StartDateResponse:
+async def get_weather_forcast(
+    large_area_code: str = Query(..., alias="largeAreaCode")
+) -> StartDateResponse:
     """
     天気予報の取得開始日を返す
     """
-    return weatherforecastservice.get_start_date()
+    return weatherforecastservice.get_start_date(large_area_code)
