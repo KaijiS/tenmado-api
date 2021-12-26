@@ -14,7 +14,7 @@ app = FastAPI(
     default_response_class=ORJSONResponse,
 )
 
-logger.setup_logger()
+# logger.setup_logger()
 
 # ルーティングをinclude
 app.include_router(samplerouter.router)

@@ -4,6 +4,7 @@ import datetime
 from fastapi import APIRouter, Depends, Query
 
 from schemas.weatherforecast.weatherforecastresponse import WeatherForecastResponse
+from schemas.weatherforecast.startdateresponse import StartDateResponse
 from services import weatherforecastservice
 
 router = APIRouter()
@@ -25,3 +26,11 @@ async def get_weather_forcast(
         report_date_to=report_date_to,
         forecastdays=forecastdays,
     )
+
+
+@router.get("/startdate", response_model=StartDateResponse)
+async def get_weather_forcast() -> StartDateResponse:
+    """
+    天気予報の取得開始日を返す
+    """
+    return weatherforecastservice.get_start_date()

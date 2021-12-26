@@ -58,3 +58,13 @@ def findbylargeareacode(
         weekweathers.append(weekweather)
 
     return weekweathers
+
+
+def findStartDate() -> datetime.date:
+
+    return [
+        weekweather_querydocumentsnapshots.to_dict()
+        for weekweather_querydocumentsnapshots in (
+            db.collection("weekweather").order_by("report_datetime").limit(1).stream()
+        )
+    ][0]["report_datetime"]

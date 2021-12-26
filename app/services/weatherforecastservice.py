@@ -5,6 +5,7 @@ import json
 from schemas.weatherforecast.weatherforecastresponse import WeatherForecastResponse
 from schemas.weatherforecast.report import Report
 from schemas.weatherforecast.forecast import Forecast
+from schemas.weatherforecast.startdateresponse import StartDateResponse
 from repositories import weekweatherrepository
 
 
@@ -89,3 +90,11 @@ def get_weather_forcast(
     )
 
     return weatherforecastresponse
+
+
+def get_start_date() -> StartDateResponse:
+
+    start_date = weekweatherrepository.findStartDate()
+    print(start_date)
+    startdateresponse = StartDateResponse(start_date=start_date)
+    return startdateresponse
