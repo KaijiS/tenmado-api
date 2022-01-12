@@ -1,11 +1,15 @@
 import os
 import logging
+from dotenv import load_dotenv
 from google.cloud.logging import Client, Resource
 from google.cloud.logging.handlers import CloudLoggingHandler, setup_logging
 
 
 def setup_logger():
     """ルートロガーに CloudLoggingの設定をする"""
+
+    if os.environ.get("_ENV") == "local":
+        load_dotenv("local.env")
 
     logging_client = Client()
     resource = Resource(
