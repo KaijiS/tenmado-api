@@ -108,17 +108,31 @@ def get_meteorological_observatory() -> MeteorologicalObservatoryResponse:
 
     largeareas_firestoreschema = weekweatherrepository.findmeteorologicalobservatory()
 
+    # 気象台コードと気象台名を取得し、ユニークを取る
     meteorological_observatory_unique_list = [
-        {
-            "meteorological_observatory_code": largearea_firestoreschema[
-                "meteorological_observatory_code"
-            ],
-            "meteorological_observatory_name": largearea_firestoreschema[
-                "meteorological_observatory_name"
-            ],
-        }
-        for largearea_firestoreschema in largeareas_firestoreschema
+        dict(s)
+        for s in set(
+            [
+                frozenset(
+                    {
+                        "meteorological_observatory_code": largearea_firestoreschema[
+                            "meteorological_observatory_code"
+                        ],
+                        "meteorological_observatory_name": largearea_firestoreschema[
+                            "meteorological_observatory_name"
+                        ],
+                    }.items()
+                )
+                for largearea_firestoreschema in largeareas_firestoreschema
+            ]
+        )
     ]
+    # 並び替え
+    meteorological_observatory_unique_list = sorted(
+        meteorological_observatory_unique_list,
+        key=lambda x: x["meteorological_observatory_code"],
+        reverse=False,
+    )
 
     meteorological_observatories = []
     for meteorological_observatory_unique in meteorological_observatory_unique_list:
