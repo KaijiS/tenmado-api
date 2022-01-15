@@ -1,12 +1,12 @@
 from pydantic import BaseModel
 from pydantic import Field
 
-from schemas.weatherforecast.meteorogicalobservatory import MeteorogicalObservatory
+from schemas.weatherforecast.meteorologicalobservatory import MeteorologicalObservatory
 
 
-class MeteorogicalObservatoryResponse(BaseModel):
+class MeteorologicalObservatoryResponse(BaseModel):
 
-    meteorologicalObservatories: list[MeteorogicalObservatory] = Field(...)
+    meteorological_observatories: list[MeteorologicalObservatory] = Field(...)
 
     class Config:
         allow_population_by_field_name = True

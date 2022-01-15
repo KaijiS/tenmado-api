@@ -4,7 +4,7 @@ from pydantic import Field
 from schemas.weatherforecast.largearea import LargeArea
 
 
-class MeteorogicalObservatory(BaseModel):
+class MeteorologicalObservatory(BaseModel):
 
     meteorological_observatory_code: str = Field(
         ...,

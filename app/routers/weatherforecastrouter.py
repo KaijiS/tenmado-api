@@ -5,8 +5,8 @@ from fastapi import APIRouter, Depends, Query
 
 from schemas.weatherforecast.weatherforecastresponse import WeatherForecastResponse
 from schemas.weatherforecast.startdateresponse import StartDateResponse
-from schemas.weatherforecast.meteorogicalobservatoryresponse import (
-    MeteorogicalObservatoryResponse,
+from schemas.weatherforecast.meteorologicalobservatoryresponse import (
+    MeteorologicalObservatoryResponse,
 )
 from services import weatherforecastservice
 
@@ -42,10 +42,10 @@ async def get_weather_forcast(
 
 
 @router.get(
-    "/meteorologicalobservatory", response_model=MeteorogicalObservatoryResponse
+    "/meteorologicalobservatory", response_model=MeteorologicalObservatoryResponse
 )
-async def get_meteorological_observatory() -> MeteorogicalObservatoryResponse:
+async def get_meteorological_observatory() -> MeteorologicalObservatoryResponse:
     """
     天気予報の取得開始日を返す
     """
-    return MeteorogicalObservatoryResponse
+    return weatherforecastservice.get_meteorological_observatory()

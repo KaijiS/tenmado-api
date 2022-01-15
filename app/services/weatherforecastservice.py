@@ -6,6 +6,11 @@ from schemas.weatherforecast.weatherforecastresponse import WeatherForecastRespo
 from schemas.weatherforecast.report import Report
 from schemas.weatherforecast.forecast import Forecast
 from schemas.weatherforecast.startdateresponse import StartDateResponse
+from schemas.weatherforecast.meteorologicalobservatoryresponse import (
+    MeteorologicalObservatoryResponse,
+)
+from schemas.weatherforecast.meteorologicalobservatory import MeteorologicalObservatory
+from schemas.weatherforecast.largearea import LargeArea
 from repositories import weekweatherrepository
 
 
@@ -97,3 +102,51 @@ def get_start_date(large_area_code: str) -> StartDateResponse:
     start_date = weekweatherrepository.findstartdatebylargeareacode(large_area_code)
     startdateresponse = StartDateResponse(start_date=start_date)
     return startdateresponse
+
+
+def get_meteorological_observatory() -> MeteorologicalObservatoryResponse:
+
+    largeareas_firestoreschema = weekweatherrepository.findmeteorologicalobservatory()
+
+    meteorological_observatory_unique_list = [
+        {
+            "meteorological_observatory_code": largearea_firestoreschema[
+                "meteorological_observatory_code"
+            ],
+            "meteorological_observatory_name": largearea_firestoreschema[
+                "meteorological_observatory_name"
+            ],
+        }
+        for largearea_firestoreschema in largeareas_firestoreschema
+    ]
+
+    meteorological_observatories = []
+    for meteorological_observatory_unique in meteorological_observatory_unique_list:
+
+        large_areas = [
+            LargeArea(
+                large_area_code=largearea_firestoreschema["large_area_code"],
+                large_area_name=largearea_firestoreschema["large_area_name"],
+            )
+            for largearea_firestoreschema in largeareas_firestoreschema
+            if largearea_firestoreschema["meteorological_observatory_code"]
+            == meteorological_observatory_unique["meteorological_observatory_code"]
+        ]
+
+        meteorological_observatories.append(
+            MeteorologicalObservatory(
+                meteorological_observatory_code=meteorological_observatory_unique[
+                    "meteorological_observatory_code"
+                ],
+                meteorological_observatory_name=meteorological_observatory_unique[
+                    "meteorological_observatory_name"
+                ],
+                large_areas=large_areas,
+            )
+        )
+
+    meteorological_observatory_response = MeteorologicalObservatoryResponse(
+        meteorological_observatories=meteorological_observatories
+    )
+
+    return meteorological_observatory_response
