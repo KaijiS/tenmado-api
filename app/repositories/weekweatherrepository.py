@@ -72,3 +72,13 @@ def findstartdatebylargeareacode(large_area_code) -> datetime.date:
             .stream()
         )
     ][0]["report_datetime"]
+
+
+def findmeteorologicalobservatory() -> dict[str:Any]:
+
+    return [
+        largearea.to_dict()
+        for largearea in db.collection("largearea")
+        .order_by("meteorological_observatory_code")
+        .stream()
+    ]
