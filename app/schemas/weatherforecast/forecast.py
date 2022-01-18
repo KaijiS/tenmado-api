@@ -10,7 +10,13 @@ class Forecast(BaseModel):
     forecast_target_date: datetime.date = Field(
         ..., description="予報対象日", alias="forecastTargetDate", example="2021-01-02"
     )
+    weather_code: str = Field(
+        ..., description="天気コード", alias="weatherCode", example="100"
+    )
     weather: str = Field(..., description="天気", alias="weather", example="晴れのち雨")
+    weather_fig_url: str = Field(
+        ..., description="天気画像", alias="weatherFigUrl", example="https://aaa.10.svg"
+    )
     pop: str = Field(..., description="降水確率", alias="pop", example="0/20/60/80")
     reliability: Optional[str] = Field(
         ..., description="信頼度", alias="reliability", example="A"

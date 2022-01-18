@@ -35,6 +35,11 @@ def get_weather_forcast(
     with open("constants/TELOPS.json") as f:
         TELOPS = json.load(f)
 
+    # 天気画像ベースURL
+    WEATHER_FIG_URL_BASE = (
+        "https://www.jma.go.jp/bosai/forecast/img/{weather_fig_filename}"
+    )
+
     # 週予報情報を取得
     weekweathers = weekweatherrepository.findbylargeareacode(
         large_area_code=large_area_code,
@@ -61,7 +66,11 @@ def get_weather_forcast(
 
             forcast = Forecast(
                 forecast_target_date=forecast_source["forecast_target_date"],
+                weather_code=forecast_source["weather_code"],
                 weather=TELOPS[forecast_source["weather_code"]][3],
+                weather_fig_url=WEATHER_FIG_URL_BASE.format(
+                    weather_fig_filename=TELOPS[forecast_source["weather_code"]][0]
+                ),
                 pop=forecast_source["pop"],
                 reliability=forecast_source["reliability"],
                 lowest_temperature=forecast_source["lowest_temperature"],
