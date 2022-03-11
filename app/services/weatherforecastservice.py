@@ -9,6 +9,7 @@ from schemas.weatherforecast.startdateresponse import StartDateResponse
 from schemas.weatherforecast.meteorologicalobservatoryresponse import (
     MeteorologicalObservatoryResponse,
 )
+from schemas.weatherforecast.kubun import Kubun
 from schemas.weatherforecast.meteorologicalobservatory import MeteorologicalObservatory
 from schemas.weatherforecast.largearea import LargeArea
 from repositories import weekweatherrepository
@@ -173,3 +174,48 @@ def get_meteorological_observatory() -> MeteorologicalObservatoryResponse:
     )
 
     return meteorological_observatory_response
+
+
+def get_kubun() -> list[Kubun]:
+
+    kubuns_firestoreschema = weekweatherrepository.findkubun()
+
+    kubuns = []
+    for kubun_firestoreschema in kubuns_firestoreschema:
+
+        meteorological_observatories = []
+        for meteorological_observatory in kubun_firestoreschema[
+            "meteorological_observatory"
+        ]:
+
+            large_areas = []
+            for large_area in meteorological_observatory["large_areas"]:
+
+                large_areas.append(
+                    LargeArea(
+                        large_area_code=large_area["large_area_code"],
+                        large_area_name=large_area["large_area_name"],
+                    )
+                )
+
+            meteorological_observatories.append(
+                MeteorologicalObservatory(
+                    meteorological_observatory_code=meteorological_observatory[
+                        "meteorological_observatory_code"
+                    ],
+                    meteorological_observatory_name=meteorological_observatory[
+                        "meteorological_observatory_name"
+                    ],
+                    large_areas=large_areas,
+                )
+            )
+
+        kubuns.append(
+            Kubun(
+                kubun_code=kubun_firestoreschema["kubun_code"],
+                kubun_name=kubun_firestoreschema["kubun_name"],
+                meteorological_observatories=meteorological_observatories,
+            )
+        )
+
+    return kubuns
