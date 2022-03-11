@@ -82,3 +82,11 @@ def findmeteorologicalobservatory() -> dict[str:Any]:
         .order_by("meteorological_observatory_code")
         .stream()
     ]
+
+
+def findkubun() -> dict[str:Any]:
+
+    return [
+        largearea.to_dict()
+        for largearea in db.collection("kubun").order_by("kubun_code").stream()
+    ]
