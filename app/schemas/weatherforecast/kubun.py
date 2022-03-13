@@ -9,7 +9,7 @@ class Kubun(BaseModel):
     kubun_code: str = Field(..., description="予報区分コード", alias="kubunCode", example="01")
     kubun_name: str = Field(..., description="予報区分名", alias="kubunName", example="北海道")
     meteorological_observatories: list[MeteorologicalObservatory] = Field(
-        ..., alias="meteorologicalObservatorys"
+        ..., alias="meteorologicalObservatories"
     )
 
     class Config:
