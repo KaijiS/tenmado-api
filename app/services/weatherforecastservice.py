@@ -9,7 +9,9 @@ from schemas.weatherforecast.startdateresponse import StartDateResponse
 from schemas.weatherforecast.meteorologicalobservatoryresponse import (
     MeteorologicalObservatoryResponse,
 )
+from schemas.weatherforecast.kubunresponse import KubunResponse
 from schemas.weatherforecast.kubun import Kubun
+from schemas.weatherforecast.flattenkubun import FlattenKubun
 from schemas.weatherforecast.meteorologicalobservatory import MeteorologicalObservatory
 from schemas.weatherforecast.largearea import LargeArea
 from repositories import weekweatherrepository
@@ -176,11 +178,12 @@ def get_meteorological_observatory() -> MeteorologicalObservatoryResponse:
     return meteorological_observatory_response
 
 
-def get_kubun() -> list[Kubun]:
+def get_kubun() -> KubunResponse:
 
     kubuns_firestoreschema = weekweatherrepository.findkubun()
 
     kubuns = []
+    flatten_kubuns = []
     for kubun_firestoreschema in kubuns_firestoreschema:
 
         meteorological_observatories = []
@@ -193,6 +196,21 @@ def get_kubun() -> list[Kubun]:
 
                 large_areas.append(
                     LargeArea(
+                        large_area_code=large_area["large_area_code"],
+                        large_area_name=large_area["large_area_name"],
+                    )
+                )
+
+                flatten_kubuns.append(
+                    FlattenKubun(
+                        kubun_code=kubun_firestoreschema["kubun_code"],
+                        kubun_name=kubun_firestoreschema["kubun_name"],
+                        meteorological_observatory_code=meteorological_observatory[
+                            "meteorological_observatory_code"
+                        ],
+                        meteorological_observatory_name=meteorological_observatory[
+                            "meteorological_observatory_name"
+                        ],
                         large_area_code=large_area["large_area_code"],
                         large_area_name=large_area["large_area_name"],
                     )
@@ -218,4 +236,4 @@ def get_kubun() -> list[Kubun]:
             )
         )
 
-    return kubuns
+    return KubunResponse(kubuns=kubuns, flattenkubuns=flatten_kubuns)

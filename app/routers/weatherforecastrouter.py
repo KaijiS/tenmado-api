@@ -8,7 +8,7 @@ from schemas.weatherforecast.startdateresponse import StartDateResponse
 from schemas.weatherforecast.meteorologicalobservatoryresponse import (
     MeteorologicalObservatoryResponse,
 )
-from schemas.weatherforecast.kubun import Kubun
+from schemas.weatherforecast.kubunresponse import KubunResponse
 from services import weatherforecastservice
 
 router = APIRouter()
@@ -52,8 +52,8 @@ async def get_meteorological_observatory() -> MeteorologicalObservatoryResponse:
     return weatherforecastservice.get_meteorological_observatory()
 
 
-@router.get("/kubun", response_model=list[Kubun])
-async def get_kubun() -> MeteorologicalObservatoryResponse:
+@router.get("/kubun", response_model=KubunResponse)
+async def get_kubun() -> KubunResponse:
     """
     予報区分、気象台、地方一覧を返す
     """
