@@ -1,15 +1,12 @@
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
-
+from routers import samplerouter, weatherforecastrouter
 from utils import logger
-from routers import samplerouter
-from routers import weatherforecastrouter
-
 
 app = FastAPI(
     title="tenmado-api",
     description="tenmadoプロジェクトのAPIの処理を担う",
-    version="1.0",
+    version="1.1",
     # デフォルトの応答クラスを指定: ORJSONResponseｰ>パフォーマンス高い
     default_response_class=ORJSONResponse,
 )

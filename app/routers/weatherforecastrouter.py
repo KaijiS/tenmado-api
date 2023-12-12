@@ -1,60 +1,66 @@
-from typing import Optional
 import datetime
 
-from fastapi import APIRouter, Depends, Query
-
-from schemas.weatherforecast.weatherforecastresponse import WeatherForecastResponse
-from schemas.weatherforecast.startdateresponse import StartDateResponse
-from schemas.weatherforecast.meteorologicalobservatoryresponse import (
-    MeteorologicalObservatoryResponse,
-)
-from schemas.weatherforecast.kubunresponse import KubunResponse
+from fastapi import APIRouter, Query
+from schemas.weatherforecast.kubun import Kubun
+from schemas.weatherforecast.largearea import LargeArea
+from schemas.weatherforecast.startdate import StartDate
+from schemas.weatherforecast.weatherforecast import WeatherForecast
 from services import weatherforecastservice
 
 router = APIRouter()
 
 
-@router.get("/", response_model=WeatherForecastResponse)
+@router.get("/", response_model=WeatherForecast)
 async def get_weather_forcast(
+    meteorological_observatory_name: str = Query(
+        ..., alias="meteorologicalObservatoryName"
+    ),
     large_area_code: str = Query(..., alias="largeAreaCode"),
-    report_date_from: datetime.date = Query(..., alias="reportDateFrom"),
-    report_date_to: datetime.date = Query(..., alias="reportDateTo"),
-    forecastdays: int = Query(..., alias="forecastdays"),
-) -> WeatherForecastResponse:
+    report_date: datetime.date = Query(..., alias="reportDate"),
+) -> WeatherForecast:
     """
     天気予報の情報を返す
     """
     return weatherforecastservice.get_weather_forcast(
+        meteorological_observatory_name=meteorological_observatory_name,
         large_area_code=large_area_code,
-        report_date_from=report_date_from,
-        report_date_to=report_date_to,
-        forecastdays=forecastdays,
+        report_date=report_date,
     )
 
 
-@router.get("/startdate", response_model=StartDateResponse)
-async def get_weather_forcast(
-    large_area_code: str = Query(..., alias="largeAreaCode")
-) -> StartDateResponse:
+@router.get("/largearea", response_model=list[LargeArea])
+async def get_largearea(
+    meteorological_observatory_name: str = Query(
+        ..., alias="meteorologicalObservatoryName"
+    ),
+    report_date: datetime.date = Query(..., alias="reportDate"),
+) -> list[LargeArea]:
     """
     天気予報の取得開始日を返す
     """
-    return weatherforecastservice.get_start_date(large_area_code)
+    return weatherforecastservice.get_largearea(
+        meteorological_observatory_name=meteorological_observatory_name,
+        report_date=report_date,
+    )
 
 
-@router.get(
-    "/meteorologicalobservatory", response_model=MeteorologicalObservatoryResponse
-)
-async def get_meteorological_observatory() -> MeteorologicalObservatoryResponse:
+@router.get("/startdate", response_model=StartDate)
+async def get_start_date(
+    meteorological_observatory_name: str = Query(
+        ..., alias="meteorologicalObservatoryName"
+    )
+) -> StartDate:
     """
-    気象台および地方一覧を返す
+    天気予報の取得開始日を返す
     """
-    return weatherforecastservice.get_meteorological_observatory()
+    return weatherforecastservice.get_start_date(
+        meteorological_observatory_name=meteorological_observatory_name
+    )
 
 
-@router.get("/kubun", response_model=KubunResponse)
-async def get_kubun() -> KubunResponse:
+@router.get("/kubun", response_model=list[Kubun])
+async def get_kubun() -> list[Kubun]:
     """
-    予報区分、気象台、地方一覧を返す
+    予報区分、気象台
     """
     return weatherforecastservice.get_kubun()

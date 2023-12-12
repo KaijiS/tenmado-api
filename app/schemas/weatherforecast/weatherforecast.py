@@ -1,13 +1,10 @@
 import datetime
 
-from pydantic import BaseModel
-from pydantic import Field
-
-from schemas.weatherforecast.report import Report
+from pydantic import BaseModel, Field
+from schemas.weatherforecast.forecast import Forecast
 
 
-class WeatherForecastResponse(BaseModel):
-
+class WeatherForecast(BaseModel):
     meteorological_observatory_name: str = Field(
         ..., description="気象台名", alias="meteorologicalObservatoryName", example="〇〇気象台"
     )
@@ -35,14 +32,10 @@ class WeatherForecastResponse(BaseModel):
         alias="cityName",
         example="〇〇市",
     )
-    report_date_from: datetime.date = Field(
-        ..., description="予報レポート日開始", alias="reportDateFrom", example="2021-01-01"
+    report_date: datetime.date = Field(
+        ..., description="予報レポート日", alias="reportDate", example="2021-01-01"
     )
-    report_date_to: datetime.date = Field(
-        ..., description="予報レポート日終了", alias="reportDateTo", example="2021-01-03"
-    )
-    report_days: int = Field(..., description="予報レポート日数", alias="reportDays", example=3)
-    reports: list[Report] = Field(...)
+    forecasts: list[Forecast] = Field(...)
 
     class Config:
         allow_population_by_field_name = True
