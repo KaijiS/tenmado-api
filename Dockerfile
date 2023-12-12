@@ -7,7 +7,7 @@
 # Docker のキャッシュ戦略をうまく使うため、一番最初に Poetry をインストール。
 # こうすることで、ビルドのたびに Poetry をインストールする手間が省ける。
 # 次に、pyproject.toml と poetry.lock だけをコピーして、requirements.txt を生成
-FROM python:3.9-slim as builder
+FROM python:3.9.4-slim as builder
 
 WORKDIR /usr/src/app
 
@@ -23,7 +23,7 @@ RUN poetry export -f requirements.txt > requirements.txt
 # もしこれらのファイルに変更がない場合はキャッシュが使われて自動で次のレイヤのビルドが行われるので、
 # ビルドのたびに依存パッケージをダウンロードしてくるような動作を事前に防止することができる。
 # これで圧倒的にビルド時間を節約できる。インストールが終わった後に、各種 Python スクリプトを転送して、動かしたいコマンドなどを書いて完成
-FROM python:3.9-slim
+FROM python:3.9.4-slim
 
 ENV PYTHONUNBUFFERED=1
 
@@ -35,8 +35,8 @@ RUN pip install -r requirements.txt
 
 COPY ./app /usr/src/app
 
-RUN apt-get update
-RUN apt-get upgrade -y
+# RUN apt-get update
+# RUN apt-get upgrade -y
 
 # RUN apt install -y curl
 
