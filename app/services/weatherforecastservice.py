@@ -48,7 +48,7 @@ def get_weather_forcast(
             ]
             large_area_code = weekweather["large_area_code"]
             large_area_name = weekweather["large_area_name"]
-            city_code = weekweather["city_code"]
+            # city_code = weekweather["city_code"]
             city_name = weekweather["city_name"]
 
         forcast = Forecast(
@@ -73,7 +73,7 @@ def get_weather_forcast(
         meteorological_observatory_name=meteorological_observatory_name,
         large_area_code=large_area_code,
         large_area_name=large_area_name,
-        city_code=city_code,
+        # city_code=city_code,
         city_name=city_name,
         report_date=report_date,
         forecasts=forecasts,

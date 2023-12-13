@@ -20,12 +20,12 @@ class WeatherForecast(BaseModel):
         alias="largeAreaName",
         example="〇〇地方",
     )
-    city_code: str = Field(
-        ...,
-        description="都市コード",
-        alias="cityCode",
-        example="11111",
-    )
+    # city_code: str = Field(
+    #     ...,
+    #     description="都市コード",
+    #     alias="cityCode",
+    #     example="11111",
+    # )
     city_name: str = Field(
         ...,
         description="都市名",
