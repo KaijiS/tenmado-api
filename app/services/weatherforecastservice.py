@@ -1,4 +1,5 @@
 import datetime
+import json
 
 import pandas as pd
 from repositories import weekweatherrepository
@@ -24,6 +25,10 @@ def get_weather_forcast(
     returns
         WeatherForecast
     """
+
+    # 天気コードとその内容のマッピング情報をjsonファイルから取得
+    with open("constants/TELOPS.json") as f:
+        TELOPS = json.load(f)
 
     # 天気画像ベースURL
     WEATHER_FIG_URL_BASE = (
@@ -57,6 +62,9 @@ def get_weather_forcast(
             weather=weekweather["weather_text"],
             weather_fig_url=WEATHER_FIG_URL_BASE.format(
                 weather_fig_filename=weekweather["weather_code"] + ".svg"
+            ),
+            weather_fig_url=WEATHER_FIG_URL_BASE.format(
+                weather_fig_filename=TELOPS[weekweather["weather_code"]][0]
             ),
             pop=weekweather["pop"],
             reliability=weekweather["reliability"],
