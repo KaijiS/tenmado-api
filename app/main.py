@@ -14,13 +14,14 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "https://tenmado-front-dev-6jbikhj2nq-an.a.run.app",
-        "https://tenmado-front-6jbikhj2nq-an.a.run.app",
-        "https://tenmado.app/",
-    ],
-    allow_credentials=True,
+    # allow_origins=[
+    #     "http://localhost:3000",
+    #     "https://tenmado-front-dev-6jbikhj2nq-an.a.run.app",
+    #     "https://tenmado-front-6jbikhj2nq-an.a.run.app",
+    #     "https://tenmado.app/",
+    # ],
+    allow_origins=["*"],
+    # allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
