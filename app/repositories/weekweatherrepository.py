@@ -2,6 +2,7 @@ import datetime
 import os
 from typing import Any
 
+import pytz
 from google.cloud import firestore
 
 db = firestore.Client()
@@ -22,7 +23,9 @@ def findbymeteorologicalobservatorynameandlargeareacode(
         .where(
             "report_date",
             "==",
-            datetime.datetime.combine(report_date, datetime.time(0, 0, 0)),
+            pytz.timezone("Asia/Tokyo").localize(
+                datetime.datetime.combine(report_date, datetime.time(9, 0, 0))
+            ),
         )
         .order_by("forecast_target_date")
     ).stream()
@@ -43,7 +46,9 @@ def findlargeareabymeteorologicalobservatorynameandreportdate(
             .where(
                 "report_date",
                 "==",
-                datetime.datetime.combine(report_date, datetime.time(0, 0, 0)),
+                pytz.timezone("Asia/Tokyo").localize(
+                    datetime.datetime.combine(report_date, datetime.time(9, 0, 0))
+                ),
             )
             .order_by("large_area_code")
             .stream()
