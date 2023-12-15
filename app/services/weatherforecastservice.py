@@ -61,9 +61,6 @@ def get_weather_forcast(
             weather_code=weekweather["weather_code"],
             weather=weekweather["weather_text"],
             weather_fig_url=WEATHER_FIG_URL_BASE.format(
-                weather_fig_filename=weekweather["weather_code"] + ".svg"
-            ),
-            weather_fig_url=WEATHER_FIG_URL_BASE.format(
                 weather_fig_filename=TELOPS[weekweather["weather_code"]][0]
             ),
             pop=weekweather["pop"],
